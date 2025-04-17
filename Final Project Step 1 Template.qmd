@@ -80,7 +80,7 @@ The deadline for this step is Friday, April 25.
 # Initial Insights:
 `r bfcolor("Add your answer here", "red")` \
 
-We are interested in exploring how different car attributes and features affect the way cars are priced. This dataset includes information like brand, model, fuel type, and size, which are important when it comes to a car’s value. These insights could help car sellers make better pricing decisions and assist buyers in understanding what features contribute most to a car’s market value.
+We are interested in exploring how different car attributes and features affect the way cars are priced. This dataset includes information like brand, model, fuel type, and size, which are important when it comes to a car’s value. These insights could help car sellers make better pricing decisions and assist buyers in understanding what features contribute most to a car’s market value. A potential implication is that we don't know the mileage of these cars from this dataset, which does have an impact on the pricing. 
 
 
 
