@@ -64,23 +64,24 @@ In this step, you will develop clear research questions and hypotheses based on 
 ## Research Questions
 
 **Question 1**
-
+Which vehicle features are the most significant predictors of car price?
 
 **Question 2**
-
+To what extent do a car’s physical dimensions (width, length, and height) influence its price?
 
 **Question 3**
+Is there a statistically significant difference in car prices across various body types (e.g., sedan, hatchback, convertible)?
 
 ## Hypotheses
 
 **Hypothesis 1**
-
+Engine size and Horsepower are most positively correlated with price 
 
 **Hypothesis 2**
-
+The larger the width, size, and height of a car are, the higher its price is likely to be. 
 
 **Hypothesis 3**
-
+A convertible car type has the highest average price, and a hatchback car type has the lowest average price. 
 
 
 ## Exploratory Data Analysis (EDA)
