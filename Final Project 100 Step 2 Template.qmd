@@ -1,0 +1,163 @@
+---
+title: 'Final Project - Step 2 (15 Points)'
+subtitle: "PSTAT100: Data Science Concepts and Analysis" 
+
+author:
+    affiliations:
+      - name: "Spring 2025"
+affiliation-title: "Quarter"
+format: 
+ pdf: 
+    latex_engine: xelatex
+    geometry: "letterpaper, margin=0.3in"
+    code-fold: true
+    code-line-numbers: true
+    code-copy: true
+    code-tools: true
+    self-contained: true
+    toc: false
+    toc-location: left
+    number-sections: true
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message =  FALSE)
+knitr::opts_chunk$set(warning =  FALSE)
+knitr::opts_chunk$set(error =  FALSE)
+bfcolor <- function(x, color) {
+  if (knitr::is_latex_output()) {
+    sprintf("\\textcolor{%s}{\\textbf{%s}}", color, x)
+  } else if (knitr::is_html_output()) {
+    sprintf("<span style='color: %s;'><b>%s</b></span>", color, x)
+  } else x
+}
+```
+
+
+
+:::callout
+<div style="text-align: center">
+<span style="color: blue;"> **STUDENT NAME **</span> 
+</div>
+- Amelia Hammer    (503895-5)
+- STUDENT 2    (NetID 2)
+- STUDENT 3    (NetID 3)
+- STUDENT 4    (NetID 4)
+- STUDENT 5    (NetID 5)
+:::
+
+
+::: {.callout-caution}
+## Due Date
+The deadline for this step is **Friday, May 9, 2025**.
+:::
+
+
+:::{.callout-tip}
+# Instructions
+In this step, you will develop clear research questions and hypotheses based on your selected dataset, and conduct a thorough Exploratory Data Analysis (EDA). This foundational work is crucial for guiding your analysis in the following steps.
+
+:::
+
+# Step 2: Research Questions, Hypotheses, and Exploratory Data Analysis (EDA)
+
+
+## Research Questions
+
+**Question 1**
+
+
+**Question 2**
+
+
+**Question 3**
+
+## Hypotheses
+
+**Hypothesis 1**
+
+
+**Hypothesis 2**
+
+
+**Hypothesis 3**
+
+
+
+## Exploratory Data Analysis (EDA)
+
+## Data Cleaning
+```{r}
+# Load necessary libraries
+library(dplyr)
+library(ggplot2)
+
+# Read data
+df <- read.csv("/Users/ameli/Downloads/archive/CarPrice_Assignment.csv", stringsAsFactors = FALSE)
+
+# --- 1. Check for missing values ---
+colSums(is.na(df))  # Summary of missing values
+
+# --- 2. Handle outliers using IQR method for numeric columns ---
+numeric_cols <- sapply(df, is.numeric)
+for (col in names(df)[numeric_cols]) {
+  Q1 <- quantile(df[[col]], 0.25)
+  Q3 <- quantile(df[[col]], 0.75)
+  IQR_val <- Q3 - Q1
+  lower <- Q1 - 1.5 * IQR_val
+  upper <- Q3 + 1.5 * IQR_val
+  # Cap outliers at 5th and 95th percentiles instead of removing
+  df[[col]][df[[col]] < lower] <- quantile(df[[col]], 0.05)
+  df[[col]][df[[col]] > upper] <- quantile(df[[col]], 0.95)
+}
+
+# --- 3. Clean text fields (e.g., CarName) ---
+df$CarName <- tolower(df$CarName)
+df$CarName <- trimws(df$CarName)
+
+# Optional: Split 'CarName' into brand and model
+df$brand <- sapply(strsplit(df$CarName, " "), `[`, 1)
+
+# --- 4. Check for unusual factor levels or inconsistencies ---
+unique(df$doornumber)
+unique(df$fuelsystem)
+
+# Fix inconsistencies manually if needed
+df$doornumber[df$doornumber == "two"] <- "2"
+df$doornumber[df$doornumber == "four"] <- "4"
+
+# Convert to numeric
+df$doornumber <- as.numeric(df$doornumber)
+
+# --- Done! Preview cleaned data ---
+head(df)
+
+```
+
+
+## Descriptive Statistics
+```{r}
+# Load the dataset
+df <- read.csv("/Users/ameli/Downloads/archive/CarPrice_Assignment.csv", stringsAsFactors = FALSE)
+
+# Select numeric columns
+numeric_df <- df[sapply(df, is.numeric)]
+
+# Function to calculate and format stats for each column
+print_stats <- function(column_name, column_data) {
+  cat("\n---", column_name, "---\n")
+  cat("Mean: ", mean(column_data, na.rm = TRUE), "\n")
+  cat("Median: ", median(column_data, na.rm = TRUE), "\n")
+  cat("1st Quartile (Q1): ", quantile(column_data, 0.25, na.rm = TRUE), "\n")
+  cat("3rd Quartile (Q3): ", quantile(column_data, 0.75, na.rm = TRUE), "\n")
+}
+
+# Loop through each numeric column and print stats
+for (colname in names(numeric_df)) {
+  print_stats(colname, numeric_df[[colname]])
+}
+
+```
+
+
+## Data Visualization
+
