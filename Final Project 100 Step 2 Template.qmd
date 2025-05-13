@@ -162,3 +162,44 @@ for (colname in names(numeric_df)) {
 
 ## Data Visualization
 
+library(readr)
+library(tidyverse)
+library(corrplot)
+
+
+car_data <- read_csv("CarPrice_Assignment.csv")
+
+# Which vehicles are the most significant predictors of car price?
+# Select only numeric variables
+numeric_data <- car_data %>% select(where(is.numeric))
+
+# Correlation matrix
+corr_matrix <- cor(numeric_data)
+
+# Heatmap
+corrplot(corr_matrix, method="circle", type="upper")
+
+# To what extent do a car's physical dimensions (width, length, and height) influence its price?
+# Width vs Price
+ggplot(car_data, aes(x=carwidth, y=price)) +
+  geom_point() +
+  geom_smooth(method="lm", se=FALSE) +
+  labs(title="Width vs Price")
+
+# Length vs Price
+ggplot(car_data, aes(x=carlength, y=price)) +
+  geom_point() +
+  geom_smooth(method="lm", se=FALSE) +
+  labs(title="Length vs Price")
+
+# Height vs Price
+ggplot(car_data, aes(x=carheight, y=price)) +
+  geom_point() +
+  geom_smooth(method="lm", se=FALSE) +
+  labs(title="Height vs Price")
+
+# Is there a statistically significant difference in car prices across various body types?
+ggplot(car_data, aes(x=carbody, y=price)) +
+  geom_boxplot(fill="lightgreen") +
+  labs(title="Car Price by Body Type", x="Body Type", y="Price")
+
