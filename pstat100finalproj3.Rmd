@@ -62,6 +62,7 @@ Time Series Analysis: For analyzing data with temporal structure.
 Hypothesis Testing: To statistically test assumptions about your data (e.g., t-tests, chi-square tests, ANOVA).
 Exploratory Data Visualization: For uncovering patterns, trends, or anomalies through detailed graphical analysis.
 
+
 ## 1.2 Evaluation and Interpretation
 
 • Use appropriate evaluation techniques based on your selected approach:
@@ -82,8 +83,34 @@ Use clear and informative visualizations to support your analysis. Annotate visu
 ### Abstract
 Provide a brief summary of your analysis, key findings, and conclusions in a few sentences.
 
+We are interested in exploring how different car attributes and features affect the way cars are priced. This dataset includes information like brand, model, fuel type, and size, which are important when it comes to a car’s value. These insights could help car sellers make better pricing decisions and assist buyers in understanding what features contribute most to a car’s market value. A potential implication is that we don't know the mileage of these cars from this dataset, which does have an impact on the pricing.
+
+#Still needs Key Findings and conclusions 
+
 ### Introduction
 Provide an overview of your dataset, including its source, variables, and the key questions and hypothesis you are investigating.
+**About our Data**
+
+**Data Name/Title**: Car Price Prediction Multiple Linear Regression
+  
+  **Author/Owner**: MANISH KUMAR
+  
+  **Date of Publication**: UPDATED 6 YEARS AGO
+  
+  **Publication Venue**: Kaggle
+  
+  **Retrieval Date**: 4/17/25
+ 
+  **Link**: https://www.kaggle.com/datasets/hellbuoy/car-price-prediction
+
+  **Variables**: car_ID, symboling, CarName, fueltype, aspiration, doornumber, carbody, drivewheel, eniginelocation, wheelbase, carlength, carwidth, carheight, curbweight, enginetype, cylindernumber, enginesize, fuelsystem, boreratio, stroke, compressionratio, horsepower, peakrpm, citympg, highwaympg,and price
+
+**Key Questions and Hypothesis**
+We are most curious to see how different vehicle characteristics affect price.
+
+We are investigating which vehicle features are the most significant predictors of car price. We hypothesize that engine size and horsepower will be the strongest positive predictors of price.
+We are also exploring how a car’s physical dimensions, specifically its length, affect its price. We hypothesize that longer vehicles will, on average, have higher prices compared to shorter vehicles.
+Finally, we are examining whether there are statistically significant differences in car prices across body types (e.g., sedan, hatchback, convertible). We hypothesize that convertibles will have the highest average prices, while hatchbacks will have the lowest average prices.
 
 ### Data Processing
 Describe the steps taken for data cleaning, handling missing values, and any necessary preprocessing. Mention any transformations or feature engineering applied to improve the model’s performance.
