@@ -91,6 +91,7 @@ We are interested in exploring how different car attributes and features affect 
 ### Introduction
 Provide an overview of your dataset, including its source, variables, and the key questions and hypothesis you are investigating.
 **About our Data**
+This dataset contains information on 205 different car models, including features like car body type, engine size, fuel type, and performance metrics. It includes both categorical and numerical variables, with the target variable being the car's price. The data is useful for analyzing trends in vehicle specifications and building predictive models to estimate car prices.
 
 **Data Name/Title**: Car Price Prediction Multiple Linear Regression
   
