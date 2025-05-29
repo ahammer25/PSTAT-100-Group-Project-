@@ -114,22 +114,27 @@ Finally, we are examining whether there are statistically significant difference
 
 ### Data Processing
 Describe the steps taken for data cleaning, handling missing values, and any necessary preprocessing. Mention any transformations or feature engineering applied to improve the model’s performance.
+#Amelia 
 
 ### Modeling Process
 Describe your approach to selecting and implementing models.
+#Katrina, Shreya, and Amelie 
 
 ### Results
 Present your key results, using visualizations and tables as needed.
+#Katrina, Shreya, and Amelie 
 
 ### Interpretation
 Discuss how your findings answer the research questions and address your hypotheses.
+#Katrina, Shreya, and Amelie 
 
 ### Visualization and Communication
 Include well-labeled and informative visualizations, with captions explaining their relevance. Ensure clarity and professionalism in all graphical elements.
+#Meher
 
 ### Conclusion and Recommendations
 Summarize your key insights and provide actionable recommendations.Discuss any limitations of your analysis and suggest potential future directions.
-
+#Amelia and Meher 
 
 
 
