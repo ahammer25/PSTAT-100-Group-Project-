@@ -86,6 +86,7 @@ Provide a brief summary of your analysis, key findings, and conclusions in a few
 We are interested in exploring how different car attributes and features affect the way cars are priced. This dataset includes information like brand, model, fuel type, and size, which are important when it comes to a car’s value. These insights could help car sellers make better pricing decisions and assist buyers in understanding what features contribute most to a car’s market value. A potential implication is that we don't know the mileage of these cars from this dataset, which does have an impact on the pricing.
 
 #Still needs Key Findings and conclusions 
+#Amelia 
 
 ### Introduction
 Provide an overview of your dataset, including its source, variables, and the key questions and hypothesis you are investigating.
