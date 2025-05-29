@@ -1,0 +1,71 @@
+---
+title: "pstat 100 final project part 3"
+author: "Amelie Machatzke"
+date: "2025-05-29"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Step 3: Final Project Report
+
+## 1.1 Data Analysis
+Based on your research questions, dataset characteristics, and hypotheses, choose an appropriate analytical approach. This may involve statistical modeling, hypothesis testing, or in-depth exploratory data analysis using visualizations.
+
+Clearly justify your chosen method(s) and explain how they address your research questions. Where applicable, discuss any assumptions made and their implications.
+
+Possible Approaches:
+
+Regression Analysis: To explore relationships between continuous response and explanatory variables.
+Classification: For predicting categorical outcomes (e.g., logistic regression, decision trees).
+Clustering: To identify natural groupings within the data.
+Time Series Analysis: For analyzing data with temporal structure.
+Hypothesis Testing: To statistically test assumptions about your data (e.g., t-tests, chi-square tests, ANOVA).
+Exploratory Data Visualization: For uncovering patterns, trends, or anomalies through detailed graphical analysis.
+
+## 1.2 Evaluation and Interpretation
+
+• Use appropriate evaluation techniques based on your selected approach:
+• For models, apply relevant performance metrics (e.g., RMSE, accuracy) and include diagnostics to assess validity and assumptions.
+• For hypothesis testing, clearly state your null and alternative hypotheses, report p-values or confidence intervals, and interpret the results.
+• For visualizations, provide thoughtful interpretation and explain how the visuals support your research findings.
+
+## 1.3 Interpretation of Results
+
+Clearly interpret the results of your models, drawing connections back to your hypotheses and research questions. Discuss any significant patterns, anomalies, or insights found in your analysis.
+
+## 1.4 Visualization and Communication of Findings
+
+Use clear and informative visualizations to support your analysis. Annotate visualizations and discuss their significance. Ensure all visualizations have captions, labels, and are well-documented.
+
+# Final Report
+
+### Abstract
+Provide a brief summary of your analysis, key findings, and conclusions in a few sentences.
+
+### Introduction
+Provide an overview of your dataset, including its source, variables, and the key questions and hypothesis you are investigating.
+
+### Data Processing
+Describe the steps taken for data cleaning, handling missing values, and any necessary preprocessing. Mention any transformations or feature engineering applied to improve the model’s performance.
+
+### Modeling Process
+Describe your approach to selecting and implementing models.
+
+### Results
+Present your key results, using visualizations and tables as needed.
+
+### Interpretation
+Discuss how your findings answer the research questions and address your hypotheses.
+
+### Visualization and Communication
+Include well-labeled and informative visualizations, with captions explaining their relevance. Ensure clarity and professionalism in all graphical elements.
+
+### Conclusion and Recommendations
+Summarize your key insights and provide actionable recommendations.Discuss any limitations of your analysis and suggest potential future directions.
+
+
+
+
