@@ -1,5 +1,5 @@
 ---
-title: 'Final Project - Step 2 (15 Points)'
+title: 'Final Project - Step 3'
 subtitle: "PSTAT100: Data Science Concepts and Analysis" 
 
 author:
