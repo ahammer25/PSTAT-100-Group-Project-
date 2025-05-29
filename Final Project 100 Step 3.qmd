@@ -1,0 +1,224 @@
+---
+title: 'Final Project - Step 2 (15 Points)'
+subtitle: "PSTAT100: Data Science Concepts and Analysis" 
+
+author:
+    affiliations:
+      - name: "Spring 2025"
+affiliation-title: "Quarter"
+format: 
+ pdf: 
+    latex_engine: xelatex
+    geometry: "letterpaper, margin=0.3in"
+    code-fold: true
+    code-line-numbers: true
+    code-copy: true
+    code-tools: true
+    self-contained: true
+    toc: false
+    toc-location: left
+    number-sections: true
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message =  FALSE)
+knitr::opts_chunk$set(warning =  FALSE)
+knitr::opts_chunk$set(error =  FALSE)
+bfcolor <- function(x, color) {
+  if (knitr::is_latex_output()) {
+    sprintf("\\textcolor{%s}{\\textbf{%s}}", color, x)
+  } else if (knitr::is_html_output()) {
+    sprintf("<span style='color: %s;'><b>%s</b></span>", color, x)
+  } else x
+}
+```
+
+
+
+:::callout
+<div style="text-align: center">
+<span style="color: blue;"> **STUDENT NAME **</span> 
+</div>
+- Amelia Hammer(503895-5)
+- Katrina Topchiyan(A069255)
+- Shreya Reddy(6035174)
+- Amelie Machatzke(7357551)
+- Meher Brar(3580370)
+:::
+
+
+::: {.callout-caution}
+## Due Date
+The deadline for this step is **Friday, May 9, 2025**.
+:::
+
+
+:::{.callout-tip}
+# Instructions
+In this step, you will develop clear research questions and hypotheses based on your selected dataset, and conduct a thorough Exploratory Data Analysis (EDA). This foundational work is crucial for guiding your analysis in the following steps.
+
+:::
+
+# Step 2: Research Questions, Hypotheses, and Exploratory Data Analysis (EDA)
+## Research Questions
+1. Which vehicle features are the most significant predictors of car price?
+2. To what extent do a car’s physical dimensions (width, length, and height) influence its price?
+3. Is there a statistically significant difference in car prices across various body types (e.g., sedan, hatchback, convertible)?
+
+## Hypotheses
+1. Engine size and Horsepower are most positively correlated with price 
+2. The larger the width, size, and height of a car are, the higher its price is likely to be. 
+3. A convertible car type has the highest average price, and a hatchback car type has the lowest average price. 
+
+## Exploratory Data Analysis (EDA)
+
+## Data Cleaning
+```{r}
+# Load necessary libraries
+library(dplyr)
+library(ggplot2)
+
+# Read data
+df <- read.csv("CarPrice_Assignment.csv", stringsAsFactors = FALSE)
+```
+
+```{r}
+# --- 1. Check for missing values ---
+colSums(is.na(df))  # Summary of missing values
+```
+
+```{r}
+# --- 2. Handle outliers using IQR method for numeric columns ---
+numeric_cols <- sapply(df, is.numeric)
+for (col in names(df)[numeric_cols]) {
+  Q1 <- quantile(df[[col]], 0.25)
+  Q3 <- quantile(df[[col]], 0.75)
+  IQR_val <- Q3 - Q1
+  lower <- Q1 - 1.5 * IQR_val
+  upper <- Q3 + 1.5 * IQR_val
+  # Cap outliers at 5th and 95th percentiles instead of removing
+  df[[col]][df[[col]] < lower] <- quantile(df[[col]], 0.05)
+  df[[col]][df[[col]] > upper] <- quantile(df[[col]], 0.95)
+}
+```
+
+```{r}
+# --- 3. Clean text fields (e.g., CarName) ---
+df$CarName <- tolower(df$CarName)
+df$CarName <- trimws(df$CarName)
+
+# Optional: Split 'CarName' into brand and model
+df$brand <- sapply(strsplit(df$CarName, " "), `[`, 1)
+```
+
+```{r}
+# --- 4. Check for unusual factor levels or inconsistencies ---
+unique(df$doornumber)
+unique(df$fuelsystem)
+
+# Fix inconsistencies manually if needed
+df$doornumber[df$doornumber == "two"] <- "2"
+df$doornumber[df$doornumber == "four"] <- "4"
+
+# Convert to numeric
+df$doornumber <- as.numeric(df$doornumber)
+```
+## Descriptive Statistics
+
+```{r}
+# Load the dataset
+df <- read.csv("CarPrice_Assignment.csv", stringsAsFactors = FALSE)
+```
+
+```{r}
+# Select numeric columns
+numeric_df <- df[sapply(df, is.numeric)]
+```
+
+```{r}
+# Function to calculate and format stats for each column
+print_stats <- function(column_name, column_data) {
+  cat("\n---", column_name, "---\n")
+  cat("Mean: ", mean(column_data, na.rm = TRUE), "\n")
+  cat("Median: ", median(column_data, na.rm = TRUE), "\n")
+  cat("1st Quartile (Q1): ", quantile(column_data, 0.25, na.rm = TRUE), "\n")
+  cat("3rd Quartile (Q3): ", quantile(column_data, 0.75, na.rm = TRUE), "\n")
+}
+```
+
+```{r}
+# Loop through each numeric column and print stats
+for (colname in names(numeric_df)) {
+  print_stats(colname, numeric_df[[colname]])
+}
+
+```
+## Data Visualization
+```{r}
+library(readr)
+library(tidyverse)
+library(corrplot)
+
+```
+
+```{r}
+
+car_data <- read_csv("CarPrice_Assignment.csv")
+
+# Which vehicles are the most significant predictors of car price?
+# Select only numeric variables
+numeric_data <- car_data %>% select(where(is.numeric))
+```
+
+```{r}
+# Correlation matrix
+corr_matrix <- cor(numeric_data)
+```
+
+```{r}
+# Heatmap
+corrplot(corr_matrix, method="circle", type="upper")
+```
+Blue circles indicate positive correlation, whereas red indicates negative. Additionally, the bigger the circle the stronger the correlation.
+```{r}
+
+# To what extent do a car's physical dimensions (width, length, and height) influence its price?
+# Width vs Price
+ggplot(car_data, aes(x=carwidth, y=price)) +
+  geom_point() +
+  geom_smooth(method="lm", se=FALSE) +
+  labs(title="Width vs Price")
+```
+There is a clear positive correlation between car price and width. 
+```{r}
+# Length vs Price
+ggplot(car_data, aes(x=carlength, y=price)) +
+  geom_point() +
+  geom_smooth(method="lm", se=FALSE) +
+  labs(title="Length vs Price")
+```
+There is a clear positive correlation between car price and length. 
+```{r}
+# Height vs Price
+ggplot(car_data, aes(x=carheight, y=price)) +
+  geom_point() +
+  geom_smooth(method="lm", se=FALSE) +
+  labs(title="Height vs Price")
+```
+There is a slight positive correlation between price and height. 
+```{r}
+
+# Is there a statistically significant difference in car prices across various body types?
+ggplot(car_data, aes(x=carbody, y=price)) +
+  geom_boxplot(fill="lightgreen") +
+  labs(title="Car Price by Body Type", x="Body Type", y="Price")
+```
+## Insights:
+
+Hypothesis 1:
+Based on the correlation matrix we can see that the most significant predictors of car price is engine size, horsepower, curbweight, car width, and car length. We can see this based on the size and color of the circles.
+
+Hypothesis 2:
+Car width and car length show a strong positive linear relationship with price, car height has a weaker correlation with price, which we can see with a flatter line and more scattered data.
+
+Hypothesis 3: 
+We can see based on the box plots that convertibles and hardtops have the highest median price, and hatchbacks have the lowest. 
