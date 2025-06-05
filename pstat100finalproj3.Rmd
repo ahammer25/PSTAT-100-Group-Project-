@@ -199,6 +199,35 @@ The scatter plot of Car Length vs. Price shows a clear positive trend, demonstra
 **HYPOTHESIS 3**
 Convertibles have the highest average prices, while hatchbacks have the lowest average prices.
 
+To address the research question — Are there statistically significant differences in car prices across body types? — we chose one-way ANOVA, a statistical hypothesis testing method suitable for comparing means of a continuous outcome (price) across categories (carbody types). This model fits our goal of evaluating whether certain car body types (like convertibles and hatchbacks) tend to have significantly different price levels. One-way ANOVA tests the null hypothesis that the mean car price is the same for all body types. If significant, we further apply Tukey’s HSD post-hoc test to determine which specific groups differ.
+# Visualizing Mean Prices
+```{r}
+library(ggplot2)
+ggplot(df, aes(x = carbody, y = price)) +
+  geom_boxplot(fill = "lightblue") +
+  labs(title = "Car Price Distribution by Body Type", y = "Price", x = "Car Body Type") +
+  theme_minimal()
+```
+The boxplot shows clear differences in median price across car body types. Convertibles and hardtops have the highest price potential, while hatchbacks have the most compressed and lowest price distribution. This gives preliminary visual support for Hypothesis 3.
+
+# Running One-Way ANOVA
+```{r}
+anova_model <- aov(price ~ carbody, data = df)
+summary(anova_model)
+```
+The p-value for `carbody` is 0.0000145, which is highly significant. This means we reject the null hypothesis that all body types have equal mean prices. There are statistically significant differences in car prices across body types.
+
+# Finding Which Specific Groups Differ Using Post-Hoc Test (Tukey’s HSD)
+```{r}
+TukeyHSD(anova_model)
+```
+The Tukey’s HSD test identifies which specific pairs of car body types differ significantly. The comparison between convertibles and hatchbacks is statistically significant, confirming that convertibles are priced higher than hatchbacks. To further confirm Hypothesis 3 that convertibles have the highest average prices while hatchbacks have the lowest average prices, we look at the mean prices summary.
+
+# Mean Prices Summary
+```{r}
+aggregate(price ~ carbody, data = df, mean)
+```
+This table confirms that convertibles have the highest average price and hatchbacks have the lowest average price, proving that Hypothesis 3 is true. Convertibles had a price of 20391.15 dollars and hatchbacks had the price of 10391.97 dollars. These numerical findings match what was observed visually and statistically.
 
 
 ### Interpretation
@@ -222,6 +251,10 @@ Therefore, car length is positively correlated with price.
 
 **HYPOTHESIS 3**
 Convertibles have the highest average prices, while hatchbacks have the lowest average prices.
+
+Our analysis strongly supports Hypothesis 3. Using one-way ANOVA, we found statistically significant differences in mean car prices across body types. The Tukey post-hoc test further confirmed that convertibles are significantly more expensive than hatchbacks. These results answer the research question with statistical backing and suggest that body type is an important driver of car pricing.
+
+These findings highlight how vehicle body type can serve as a meaningful factor when analyzing or predicting car price variability. While the model does not capture all variation in price, it demonstrates that carbody is an important categorical predictor worth exploring further in more complex models.
 
 ### Visualization and Communication
 Include well-labeled and informative visualizations, with captions explaining their relevance. Ensure clarity and professionalism in all graphical elements.
