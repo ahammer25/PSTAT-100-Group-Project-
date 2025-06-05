@@ -116,7 +116,8 @@ Hypothesis 1: Engine size and horsepower are the strongest positive predictors o
 We are also exploring how a car’s physical dimensions, specifically its length, affect its price.
 Hypothesis 2: Longer vehicles, on average, have higher prices compared to shorter vehicles.
 
-We are examining whether there are statistically significant differences in car prices across body types (e.g., sedan, hatchback, convertible). Hypothesis 3: Convertibles have the highest average prices, while hatchbacks have the lowest average prices.
+We are examining whether there are statistically significant differences in car prices across body types (e.g., sedan, hatchback, convertible). 
+Hypothesis 3: Convertibles have the highest average prices, while hatchbacks have the lowest average prices.
 
 ### Data Processing
 Describe the steps taken for data cleaning, handling missing values, and any necessary preprocessing. Mention any transformations or feature engineering applied to improve the model’s performance.
