@@ -125,7 +125,41 @@ Describe the steps taken for data cleaning, handling missing values, and any nec
 
 ### Modeling Process
 Describe your approach to selecting and implementing models.
-#Katrina, Shreya, and Amelie 
+#Katrina, Shreya, and Amelie
+
+**HYPOTHESIS 1**
+
+**HYPOTHESIS 2**
+
+Two-Sample t-test
+
+```{r}
+df$is_long <- ifelse(df$carlength > 196, "Long", "Short")
+t.test(price ~ is_long, data = df)
+```
+The two-sample t-test demonstrated a statistically significant difference in average car prices between long and short vehicles. Cars with length greater than 196 inches were considered long, and cars with length shorter than 196 inches were considered short. The t-test returned a p-value of 0.0008507, which is less than $\alpha$ = 0.05, meaning there is no strong evidence to reject the null hypothesis that there is a statistically significant difference between the prices of long and short cars. Long cars have a mean price of $28,808.55 and short cars have a mean price of $12396.04, indicating that longer cars tend to be significantly more expensive.
+
+Regression
+
+```{r}
+model_length <- lm(price ~ carlength, data = df)
+summary(model_length)
+```
+Since the p-value is < 2.2e-16, the simple linear regression model shows a statistically significant, positive relationship between car length and price. Each additional inch in car length is associated to an average increase of $442 in car price.
+
+```{r}
+plot(df$carlength, df$price,
+     main = "Car Length vs. Price",
+     xlab = "Car Length (inches)",
+     ylab = "Price (USD)",
+     pch = 16,
+     col = "royalblue4")
+
+abline(model_length, col = "red", lwd = 2, lty = 2)
+```
+The scatter plot of Car Length vs. Price shows a clear positive trend, demonstrating that greater car length is positively correlated with car price.
+
+**HYPOTHESIS 3**
 
 ### Results
 Present your key results, using visualizations and tables as needed.
