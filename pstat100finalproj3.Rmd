@@ -137,6 +137,8 @@ Longer vehicles, on average, have higher prices compared to shorter vehicles.
 
 Two-Sample t-test
 
+We used a two-sample t-test because our hypothesis compared two groups, long and short cars. The t-test allowed us to directly compare the means of each group and conclude whether the mean price of each group was statistically significant.
+
 ```{r}
 df$is_long <- ifelse(df$carlength > 196, "Long", "Short")
 t.test(price ~ is_long, data = df)
@@ -144,6 +146,8 @@ t.test(price ~ is_long, data = df)
 The two-sample t-test demonstrated a statistically significant difference in average car prices between long and short vehicles. Cars with length greater than 196 inches were considered long, and cars with length shorter than 196 inches were considered short. The t-test returned a p-value of 0.0008507, which is less than $\alpha$ = 0.05, meaning there is no strong evidence to reject the null hypothesis that there is a statistically significant difference between the prices of long and short cars. Long cars have a mean price of $28,808.55 and short cars have a mean price of $12396.04, indicating that longer cars tend to be significantly more expensive.
 
 Regression
+
+We used a simple linear regression in order to assess the continuous relationship between car length and price and measure the slope of the best fit line. This supplemented our findings from the t-test, since the t-test only compared cars greater than and less than 196 inches long.
 
 ```{r}
 model_length <- lm(price ~ carlength, data = df)
@@ -177,6 +181,12 @@ Engine size and horsepower are the strongest positive predictors of price.
 
 **HYPOTHESIS 2**
 Longer vehicles, on average, have higher prices compared to shorter vehicles.
+
+We used both a two-sample t-test and simple linear regression. The t-test showed a statistically significant difference in average prices between long cars (longer than 196 inches) and short cars (shorter than 196 inches), with p = 0.00085. On average, longer vehicles cost approximately $16,412.51 more than short vehicles, with the average short vehicle price being $12396.04, and average long vehicle price being $28,808.55.
+
+The simple regression analysis confirmed a strong positive relationship between car length and price, showing that each additional inch in length is associated with about a $442 increase in price. 
+
+Therefore, car length is positively correlated with price.
 
 **HYPOTHESIS 3**
 Convertibles have the highest average prices, while hatchbacks have the lowest average prices.
