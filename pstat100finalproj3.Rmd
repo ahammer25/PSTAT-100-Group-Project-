@@ -131,6 +131,35 @@ Present your key results, using visualizations and tables as needed.
 **HYPOTHESIS 1**
 Engine size and horsepower are the strongest positive predictors of price.
 
+To evaluate the hypothesis that engine size and horsepower are the strongest positive predictors of car price, we selected a multiple linear regression model. This model is appropriate because the response variable, price, is continuous, and the explanatory variables—engine size and horsepower—are also continuous and expected to have a linear relationship with price. Multiple linear regression allows us to estimate the individual contribution of each predictor while controlling for the other. This is essential in our case, since engine size and horsepower may be correlated, and we want to isolate their independent effects on price.
+
+```{r}
+# model for hypothesis 1: multiple linear regression predicting price from engine size + horsepower
+model1 <- lm(price ~ enginesize + horsepower, data = df)
+summary(model1)
+```
+-all p-vales are <.001, which means both predictors are highly statistically significant
+-engine size and horse power are both strong, signifcant, positive predictors of price 
+-R-sqaured: .7933 so about 79.3% of the variation in care price is explained by this model 
+-Engine size has a coefficient of 122.45 and horsepower a coefficient of 58.85. This indicates that, on average, every one-unit increase in engine size or horsepower corresponds to an increase in car price by $122.45 and $58.85, respectively, holding the other variable constant
+
+```{r}
+cor(df$enginesize, df$price)
+cor(df$horsepower, df$price)
+```
+both correlations are reasonably high
+
+```{r}
+install.packages("caret")
+library(caret)
+varImp_model <- train(price ~ enginesize + horsepower + carlength + carwidth + carheight + curbweight + citympg + highwaympg + peakrpm, data = df, method = "lm")
+plot(varImp(varImp_model))
+```
+```{r}
+model_full <- lm(price ~ enginesize + horsepower + carlength + carwidth + carheight + curbweight + citympg + highwaympg + peakrpm, data = df)
+summary(model_full)
+```
+Based on the visualization and the regression summary, we can see that horsepower is not one of the highest predictors of price when controlling for other variables. Although it is statistically significant (p ≈ 0.038), its relative influence is smaller compared to variables like engine size, curbweight, and carwidth. This suggests that while horsepower contributes to price prediction, it is not among the most dominant factors in determining a car's value in the presence of other influential features.
 
 **HYPOTHESIS 2**
 Longer vehicles, on average, have higher prices compared to shorter vehicles.
@@ -173,11 +202,14 @@ Convertibles have the highest average prices, while hatchbacks have the lowest a
 
 
 ### Interpretation
-Discuss how your findings answer the research questions and address your hypotheses.
-#Katrina, Shreya, and Amelie 
 
 **HYPOTHESIS 1**
 Engine size and horsepower are the strongest positive predictors of price.
+Both engine size and horsepower are significant predictors of car price which we can see in the initial multiple linear regression model including only these two variables, both were found to have strong positive coefficients and p-values well below 0.001.
+
+However, when we added other variables to the model, such as car length, width, height, curb weight, fuel efficiency metrics, and peak RPM, we observed that the relative impact of horsepower decreased. Although it remained statistically significant, its effect size was smaller than that of other features like curb weight and car width. 
+
+These findings demonstrate that engine size is a consistently strong and influential predictor, while horsepower is important but comparatively less impactful in the presence of other variables. This partially confirms our hypothesis and highlights the value of using a multivariate approach to isolate the unique contribution of each predictor.
 
 **HYPOTHESIS 2**
 Longer vehicles, on average, have higher prices compared to shorter vehicles.
