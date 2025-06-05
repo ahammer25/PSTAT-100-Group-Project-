@@ -123,8 +123,9 @@ Hypothesis 3: Convertibles have the highest average prices, while hatchbacks hav
 Describe the steps taken for data cleaning, handling missing values, and any necessary preprocessing. Mention any transformations or feature engineering applied to improve the model’s performance.
 #Amelia 
 
-### Modeling Process
+### Modeling Process and Results
 Describe your approach to selecting and implementing models.
+Present your key results, using visualizations and tables as needed.
 #Katrina, Shreya, and Amelie
 
 **HYPOTHESIS 1**
@@ -161,9 +162,7 @@ The scatter plot of Car Length vs. Price shows a clear positive trend, demonstra
 
 **HYPOTHESIS 3**
 
-### Results
-Present your key results, using visualizations and tables as needed.
-#Katrina, Shreya, and Amelie 
+
 
 ### Interpretation
 Discuss how your findings answer the research questions and address your hypotheses.
