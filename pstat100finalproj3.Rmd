@@ -119,8 +119,67 @@ We are examining whether there are statistically significant differences in car 
 Hypothesis 3: Convertibles have the highest average prices, while hatchbacks have the lowest average prices.
 
 ### Data Processing
-Describe the steps taken for data cleaning, handling missing values, and any necessary preprocessing. Mention any transformations or feature engineering applied to improve the model’s performance.
-#Amelia 
+To ensure the dataset was suitable for modeling, several preprocessing steps were conducted:
+
+1. Handling Missing Values
+The dataset was first examined for missing values using colSums(is.na(df)). No missing values were detected, so no imputation or row removal was required.
+```{r echo=FALSE}
+# Load necessary libraries
+library(dplyr)
+library(ggplot2)
+
+# Read data
+df <- read.csv("CarPrice_Assignment.csv", stringsAsFactors = FALSE)
+
+# --- 1. Check for missing values ---
+colSums(is.na(df))  # Summary of missing values
+```
+We were able to derermine that there were no missing values 
+
+2. Outlier Treatment
+Outliers in numeric variables were handled using the Interquartile Range (IQR) method. For each numeric column, values falling outside 1.5 times the IQR were identified as potential outliers. Rather than removing these, the values were capped at the 5th and 95th percentiles to reduce their influence while preserving the sample size. This approach is robust and retains extreme observations without allowing them to skew the model.
+```{r echo=FALSE}
+# --- 2. Handle outliers using IQR method for numeric columns ---
+numeric_cols <- sapply(df, is.numeric)
+for (col in names(df)[numeric_cols]) {
+  Q1 <- quantile(df[[col]], 0.25)
+  Q3 <- quantile(df[[col]], 0.75)
+  IQR_val <- Q3 - Q1
+  lower <- Q1 - 1.5 * IQR_val
+  upper <- Q3 + 1.5 * IQR_val
+  # Cap outliers at 5th and 95th percentiles instead of removing
+  df[[col]][df[[col]] < lower] <- quantile(df[[col]], 0.05)
+  df[[col]][df[[col]] > upper] <- quantile(df[[col]], 0.95)
+}
+```
+
+3. Text Cleaning and Feature Engineering
+The CarName field, originally a composite of brand and model, was standardized by converting all text to lowercase and removing leading/trailing whitespace. A new variable, brand, was engineered by extracting the first word from CarName, which typically represents the manufacturer. This new feature helps capture brand-related patterns in pricing and performance.
+```{r echo=FALSE}
+ #--- 3. Clean text fields (e.g., CarName) ---
+df$CarName <- tolower(df$CarName)
+df$CarName <- trimws(df$CarName)
+
+#  Split 'CarName' into brand and model
+df$brand <- sapply(strsplit(df$CarName, " "), `[`, 1)
+```
+
+4. Inconsistent Factor Level Correction
+Manual inconsistencies were detected in categorical variables such as doornumber. For instance, entries like "two" and "four" were converted to their numeric equivalents (2 and 4). These were then cast as numeric values to be usable in modeling. This step ensures consistency across the dataset and facilitates easier interpretation and analysis.
+```{r echo=FALSE}
+# --- 4. Check for unusual factor levels or inconsistencies ---
+unique(df$doornumber)
+unique(df$fuelsystem)
+
+# Fix inconsistencies manually if needed
+df$doornumber[df$doornumber == "two"] <- "2"
+df$doornumber[df$doornumber == "four"] <- "4"
+
+# Convert to numeric
+df$doornumber <- as.numeric(df$doornumber)
+```
+
+These preprocessing steps ensured that the dataset was clean, consistent, and suitable for analysis. By addressing outliers, standardizing categorical values, and engineering relevant features, the data was better structured to support accurate and reliable model performance.
 
 ### Modeling Process and Results
 Describe your approach to selecting and implementing models.
